@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfoSaúde DF Project - Cassio Emmanuel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 50px 40px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .section p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            text-align: justify;
+            line-height: 1.8;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .role-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            margin: 30px 0;
+        }
+
+        .role-card h3 {
+            color: #667eea;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .role-card ul {
+            margin-left: 20px;
+            margin-top: 15px;
+        }
+
+        .role-card li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .dashboards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid #e9ecef;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .dashboard-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .dashboard-card .card-content {
+            padding: 20px;
+        }
+
+        .dashboard-card h3 {
+            color: #333;
+            margin: 0 0 10px 0;
+            font-size: 1.3em;
+        }
+
+        .dashboard-card p {
+            color: #666;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .dashboard-card a {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .dashboard-card a:hover {
+            transform: scale(1.05);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 30px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .timeline-item h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 30px 40px;
+            text-align: center;
+            border-top: 3px solid #667eea;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .links-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+
+        .links-section h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .links-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .links-section li {
+            margin-bottom: 10px;
+        }
+
+        .links-section a {
+            color: #764ba2;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .links-section a:hover {
+            text-decoration: underline;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .tech-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .section h2 {
+                font-size: 1.5em;
+            }
+
+            .dashboards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>InfoSaúde DF Portal</h1>
+            <p>Health Situation Room - Federal District, Brazil</p>
+        </div>
+
+        <div class="content">
+            <a href="index.html" class="back-link">← Back to Portfolio</a>
+
+            <!-- Project Overview -->
+            <section class="section">
+                <h2>📋 Project Overview</h2>
+                <p>
+                    The <strong>Strategic Information Management Directorate (DGIE)</strong> was a landmark initiative in 
+                    modernizing the Federal District Health Department (SES-DF), focused on transforming raw data into 
+                    actionable intelligence for strategic decision-making.
+                </p>
+                
+                <div class="highlight-box">
+                    <h3>🏛️ Project Context</h3>
+                    <p>
+                        Formally established by <strong>Decree No. 39,546 on December 19, 2018</strong>, the DGIE was created 
+                        under the Health Planning Subsecretariat (SUPLANS). Its objective was to centralize situational analysis 
+                        and dissemination of public health network data.
+                    </p>
+                </div>
+
+                <h3>🤝 Strategic Partnership</h3>
+                <p>
+                    This project was developed in <strong>partnership with Fiocruz Brasília</strong>, forming a mixed team that 
+                    combined the technical expertise of the foundation with the operational knowledge of the Health Department. 
+                    This collaboration was fundamental to the success and technical quality of the portal.
+                </p>
+            </section>
+
+            <!-- My Role -->
+            <section class="section">
+                <h2>👨‍💼 My Role in the Project</h2>
+                
+                <div class="role-card">
+                    <h3>Strategic Information Manager</h3>
+                    <p>
+                        I served as <strong>Strategic Information Manager</strong> at DGIE, playing a key role in the technical 
+                        organization and implementation of the Business Intelligence infrastructure. My responsibilities included:
+                    </p>
+                    <ul>
+                        <li><strong>Data Architecture:</strong> Designed and implemented the data integration framework that 
+                        consolidated information from multiple disparate sources</li>
+                        <li><strong>BI Development:</strong> Led the development of interactive dashboards and analytical panels 
+                        using Tableau and Power BI</li>
+                        <li><strong>ETL Process Management:</strong> Coordinated the extraction, transformation, and loading 
+                        processes from various database formats (SQL Server, Excel, CSV, DBF)</li>
+                        <li><strong>Team Coordination:</strong> Worked closely with the Fiocruz technical team to ensure 
+                        seamless integration between systems and methodologies</li>
+                        <li><strong>Stakeholder Management:</strong> Presented insights and analytical findings to health 
+                        department leadership to support strategic decision-making</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Project Impact -->
+            <section class="section">
+                <h2>🎯 Impact on the Health Department</h2>
+                <p>
+                    The creation of this first version of the Health Information Portal enabled the <strong>consolidation of 
+                    information that was scattered across various media</strong>, including different types of databases, Excel 
+                    files, CSV, and DBF formats, bringing together in one place data about:
+                </p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>💉 Vaccination Programs</h4>
+                        <p>Consolidated data from vaccination campaigns, immunization coverage, and vaccine stock control.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>🏥 Medical Procedures & Surgeries</h4>
+                        <p>Integrated records of consultations, surgical procedures, and specialized healthcare services.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>🩺 Primary Healthcare</h4>
+                        <p>Data from Basic Health Units (UBS) and family health programs.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>👨‍⚕️ Human Resources</h4>
+                        <p>Information about medical professional hours, available medical specialties, and team distribution.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>📍 Infrastructure</h4>
+                        <p>Geolocation of health facilities, installed capacity, and available resources.</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>Result:</strong> The DGIE established itself as the "birthplace" of the InfoSaúde DF Portal, 
+                    created to ensure active transparency and public access to indicators such as bed occupancy, medication 
+                    stock, and outpatient productivity. The portal became the main accountability tool for the SES-DF.
+                </div>
+            </section>
+
+            <!-- Dashboards -->
+            <section class="section">
+                <h2>📊 Business Intelligence Dashboards</h2>
+                <p>
+                    Explore the main BI dashboards I developed for the Health Situation Room:
+                </p>
+
+                <div class="dashboards-grid">
+                    <div class="dashboard-card">
+                        <img src="images/surgical procedures.png" alt="Surgical Procedures Dashboard">
+                        <div class="card-content">
+                            <h3>Surgical Procedures</h3>
+                            <p>Real-time tracking of surgeries performed, waiting times, specialties, and performance by 
+                            health facility.</p>
+                            <a href="https://info.saude.df.gov.br/sala-de-situacao/painel-infosaude-atencao-secundaria-cirurgias/" 
+                               target="_blank">View Dashboard →</a>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <img src="images/vaccines.png" alt="Vaccination Dashboard">
+                        <div class="card-content">
+                            <h3>Vaccination Coverage</h3>
+                            <p>Monitoring of vaccination campaigns, coverage targets, and immunobiological distribution 
+                            across the network.</p>
+                            <a href="https://info.saude.df.gov.br/sala-de-situacao/painel-infosaude-atencao-primaria-vacinas-aplicadas-na-aps/" 
+                               target="_blank">View Dashboard →</a>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <img src="images/outpatient procedures.png" alt="Outpatient Procedures Dashboard">
+                        <div class="card-content">
+                            <h3>Outpatient Procedures</h3>
+                            <p>Comprehensive view of ambulatory consultations, procedures, and network productivity indicators.</p>
+                            <a href="https://info.saude.df.gov.br/sala-de-situacao/painel-infosaude-producao-de-servicos-ambulatorial-sia/" 
+                               target="_blank">View Dashboard →</a>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <img src="images/hospitalizations by location.png" alt="Hospitalizations by Location Dashboard">
+                        <div class="card-content">
+                            <h3>Hospitalizations by Location</h3>
+                            <p>Geographic analysis of hospitalizations, facility capacity, and procedure distribution by region.</p>
+                            <a href="https://info.saude.df.gov.br/sala-de-situacao/painel-infosaude-atencao-secundaria-estabelecimentos-e-procedimentos/" 
+                               target="_blank">View Dashboard →</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technologies -->
+            <section class="section">
+                <h2>💻 Technologies & Tools</h2>
+                <div class="tech-stack">
+                    <span class="tech-badge">Tableau</span>
+                    <span class="tech-badge">Power BI</span>
+                    <span class="tech-badge">SQL Server</span>
+                    <span class="tech-badge">PostgreSQL</span>
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">R</span>
+                    <span class="tech-badge">ETL Processes</span>
+                    <span class="tech-badge">Data Integration</span>
+                </div>
+                
+                <div class="highlight-box">
+                    <p><strong>Business Intelligence:</strong> Tableau, Power BI for interactive dashboards and executive reports</p>
+                    <p><strong>Database Management:</strong> SQL Server, PostgreSQL for data warehousing and query optimization</p>
+                    <p><strong>Data Processing:</strong> Python, R for ETL pipelines and data transformation</p>
+                    <p><strong>Data Sources:</strong> Excel, CSV, DBF, Multiple Database Systems integration</p>
+                    <p><strong>Visualization:</strong> Interactive dashboards, geographic maps, real-time KPI indicators</p>
+                </div>
+            </section>
+
+            <!-- References -->
+            <section class="section">
+                <h2>🔗 References & Documentation</h2>
+                
+                <div class="links-section">
+                    <h4>📄 Official Documentation</h4>
+                    <ul>
+                        <li>
+                            <strong>Main Portal:</strong> 
+                            <a href="https://info.saude.df.gov.br/" target="_blank">info.saude.df.gov.br</a>
+                        </li>
+                        <li>
+                            <strong>Situation Room:</strong> 
+                            <a href="https://info.saude.df.gov.br/sala-de-situacao/" target="_blank">
+                                info.saude.df.gov.br/sala-de-situacao
+                            </a>
+                        </li>
+                        <li>
+                            <strong>Creation Decree:</strong> 
+                            Decree No. 39,546 (DODF No. 241, December 20, 2018)
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="links-section">
+                    <h4>🤝 Fiocruz Partnership</h4>
+                    <ul>
+                        <li>
+                            <a href="https://www.fiocruzbrasilia.fiocruz.br/parceria-entre-sesdf-e-fiocruz-brasilia-resulta-em-lancamento-da-sala-de-situacao/" 
+                               target="_blank">
+                                Article: Partnership between SES-DF and Fiocruz Brasília results in Situation Room launch
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Key Achievements -->
+            <section class="section">
+                <h2>🏆 Key Achievements</h2>
+                <div class="highlight-box">
+                    <ul style="margin-left: 20px;">
+                        <li><strong>Data Consolidation:</strong> Successfully integrated data from 15+ disparate sources into 
+                        a unified BI platform</li>
+                        <li><strong>Transparency:</strong> Enabled public access to real-time health indicators, improving 
+                        government accountability</li>
+                        <li><strong>Decision Support:</strong> Provided executive leadership with actionable insights through 
+                        interactive dashboards</li>
+                        <li><strong>Process Optimization:</strong> Reduced report generation time from weeks to real-time 
+                        through automated ETL pipelines</li>
+                        <li><strong>Stakeholder Impact:</strong> Served thousands of monthly users including healthcare 
+                        professionals, administrators, and the general public</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <div class="footer">
+            <p><a href="index.html">← Back to Main Portfolio</a></p>
+            <p style="margin-top: 10px; color: #666;">© 2026 Cassio Emmanuel - Data Analyst Portfolio</p>
+        </div>
+    </div>
+</body>
+</html>
